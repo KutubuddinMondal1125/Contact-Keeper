@@ -1,5 +1,9 @@
 const express = require("express");
 const app = express();
+const connectDB = require("./config/db");
+
+// DB Connection
+connectDB();
 
 // Import My Routes
 const usersRoutes = require("./routes/users");
