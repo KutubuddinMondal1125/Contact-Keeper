@@ -2,9 +2,13 @@
   "name": "contactkeeper",
   "version": "1.0.0",
   "description": "An App which stores your Contacts Information",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client" : "npm start --prefix client",
+    "clientinstall": "npm install --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Kutub",
   "license": "ISC",
