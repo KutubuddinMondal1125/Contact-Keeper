@@ -1,12 +1,29 @@
-import React from 'react';
-import './App.css';
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/layout/Navbar";
+import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+import ContactState from "./context/contact/ContactState";
 
 const App = () => {
   return (
-    <div className="App">
-      Welcome to MERN Stack
-    </div>
+    <ContactState>
+      <Router>
+        <Fragment>
+          <Link to="/">
+            <Navbar title="Contact Keeper" icon="fa fa-address-book" />
+          </Link>
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
+            </Switch>
+          </div>
+        </Fragment>
+      </Router>
+    </ContactState>
   );
-}
+};
 
 export default App;
