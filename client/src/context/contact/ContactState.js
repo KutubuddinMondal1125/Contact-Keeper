@@ -12,8 +12,6 @@ import {
   FILTER_CONTACTS,
   CLEAR_CONTACTS,
   CLEAR_FILTER,
-  SET_ALERT,
-  REMOVE_ALERT,
 } from "../types";
 
 const ContactState = (props) => {
@@ -42,45 +40,45 @@ const ContactState = (props) => {
       },
     ],
     current: null,
-    filtered: null
+    filtered: null,
   };
 
-  const [state, dispath] = useReducer(contactReducer, initialState);
+  const [state, dispatch] = useReducer(contactReducer, initialState);
 
   // Add Contact
   const addContact = (contact) => {
     contact.id = uuidv4();
-    dispath({ type: ADD_CONTACT, payload: contact });
+    dispatch({ type: ADD_CONTACT, payload: contact });
   };
 
   // Delete Contact
   const deleteContact = (id) => {
-    dispath({ type: DELETE_CONTACT, payload: id });
+    dispatch({ type: DELETE_CONTACT, payload: id });
   };
 
   // Set Current Contact
   const setCurrent = (contact) => {
-    dispath({ type: SET_CURRENT, payload: contact });
+    dispatch({ type: SET_CURRENT, payload: contact });
   };
 
   // Clear Current Contact
   const clearCurrent = () => {
-    dispath({ type: CLEAR_CURRENT });
+    dispatch({ type: CLEAR_CURRENT });
   };
 
   // Update Contact
   const updateContact = (contact) => {
-    dispath({ type: UPDATE_CONTACT, payload: contact });
+    dispatch({ type: UPDATE_CONTACT, payload: contact });
   };
 
   // Filter Contacts
   const filterContacts = (text) => {
-    dispath({ type: FILTER_CONTACTS, payload: text });
+    dispatch({ type: FILTER_CONTACTS, payload: text });
   };
 
   // Clear Filter
   const clearFilter = () => {
-    dispath({ type: CLEAR_FILTER });
+    dispatch({ type: CLEAR_FILTER });
   };
 
   return (
@@ -95,7 +93,7 @@ const ContactState = (props) => {
         clearCurrent,
         updateContact,
         filterContacts,
-        clearFilter
+        clearFilter,
       }}
     >
       {props.children}
