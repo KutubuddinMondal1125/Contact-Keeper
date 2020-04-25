@@ -2,18 +2,24 @@ import React, { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
+import ContactContext from "../../context/contact/contactContext";
 
 const Navbar = ({ icon, title }) => {
   const authContext = useContext(AuthContext);
+  const contactContext = useContext(ContactContext);
   const { isAuthenticated, userLogOut, user } = authContext;
+  const { clearContacts } = contactContext;
 
   const onLogOut = () => {
     userLogOut();
+    clearContacts();
   };
 
   const authLinks = (
     <Fragment>
-      <li>Hello {user && user.name} </li>
+      <li style={{ marginRight: "10px", marginLeft: "10px" }}>
+        Hello {user && user.name}{" "}
+      </li>
       <li>
         <a href="#!" onClick={onLogOut}>
           <i className="fa fa-sign-out"></i>

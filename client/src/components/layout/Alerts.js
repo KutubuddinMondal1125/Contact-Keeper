@@ -4,10 +4,10 @@ import AlertContext from "../../context/alerts/alertContext";
 const Alerts = () => {
   const alertContext = useContext(AlertContext);
 
-  const { setAlerts, alerts } = alertContext;
+  const { alerts } = alertContext;
 
   return (
-    <div className="form-container">
+    <div className="container">
       {alerts.length > 0 &&
         alerts.map((alert) => (
           <div key={alert.id} className={`alert alert-${alert.type}`}>

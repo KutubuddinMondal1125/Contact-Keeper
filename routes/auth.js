@@ -6,22 +6,23 @@ const config = require("config");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middlewares/auth");
 
+// User model
 const User = require("../models/User");
 
-// @route       /api/auth
-// @desc        Get Logged in of a User
+// @route       GET  /api/auth
+// @desc        Get Logged in User
 // @access      Private
 router.get("/auth", auth, async (req, res) => {
   try {
     let user = await User.findById(req.user.id).select("-password");
-    res.json({ user });
+    res.json(user);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
 
-// @route       /api/auth
+// @route       POST  /api/auth
 // @desc        Auth & generate token [ Login]
 // @access      Public
 router.post(
@@ -42,7 +43,7 @@ router.post(
       let user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(400).json({ msg: "Invalid Credential" });
+        return res.status(400).json({ msg: "Email is not found" });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);

@@ -9,7 +9,7 @@ const LogIn = (props) => {
     userLogIn,
     isAuthenticated,
     error,
-    clearError,
+    clearErrors,
     loadUser,
   } = authContext;
   const { setAlerts } = alertContext;
@@ -24,9 +24,12 @@ const LogIn = (props) => {
       props.history.push("/");
       loadUser();
     }
-    if (error === "Invalid Credential") {
+    if (error === "Email is not found") {
       setAlerts(error, "danger");
-      clearError();
+      clearErrors();
+    } else if (error === "Password doesn't match") {
+      setAlerts(error, "danger");
+      clearErrors();
     }
     // eslint-disable-next-line
   }, [isAuthenticated, error, props.history]);

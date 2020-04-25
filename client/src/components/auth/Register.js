@@ -19,7 +19,7 @@ const Register = (props) => {
     if (isAuthenticated) {
       props.history.push("/");
     }
-    if (error === "User Already exist") {
+    if (error === "User Already Exist") {
       setAlerts(error, "danger");
       clearErrors();
     }

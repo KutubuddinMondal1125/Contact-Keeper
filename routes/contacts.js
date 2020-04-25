@@ -6,7 +6,7 @@ const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
 const Contact = require("../models/Contact");
 
-// @route       /api/contacts
+// @route       GET  /api/contacts
 // @desc        Show all the Contacts
 // @access      Private
 router.get("/contacts", auth, async (req, res) => {
@@ -19,7 +19,7 @@ router.get("/contacts", auth, async (req, res) => {
   }
 });
 
-// @route       /api/contact
+// @route       POST  /api/contact
 // @desc        Save a contanct
 // @access      Private
 router.post(
@@ -32,9 +32,7 @@ router.post(
         .isEmpty()
         .isLength({ min: 3 }),
       check("email", "Enter a valid Email").isEmail(),
-      check("phone", "Enter a valid Phone nummber")
-        .isNumeric()
-        .isLength({ min: 7 }),
+      check("phone", "Enter a valid Phone nummber").isLength({ min: 7 }),
     ],
   ],
   async (req, res) => {
@@ -62,7 +60,7 @@ router.post(
   }
 );
 
-// @route       /api/contact/:id
+// @route       PUT  /api/contact/:id
 // @desc        Update a Contact
 // @access      Private
 router.put("/contact/:id", auth, async (req, res) => {
@@ -91,7 +89,7 @@ router.put("/contact/:id", auth, async (req, res) => {
       { $set: contactFields },
       { new: true }
     );
-    res.json({ msg: "Contact updated successfully" });
+    res.json(contact);
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
